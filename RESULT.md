@@ -12,3 +12,5 @@
 - Step 0.3, status code of the request without a token: 401
 
 - Step 0.4, the name of your pizza: The Purple Capricciosa
+
+- Step 0.5, Python requests GET and POST: Successful
