@@ -8,3 +8,5 @@
 - Step 0.2, HTTP status code: 200
 - Step 0.2, Content-Type: application/json
 - Step 0.2, AWSALB cookie present: Yes
+
+- Step 0.3, status code of the request without a token: 401
