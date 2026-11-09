@@ -28,11 +28,18 @@
   
   ## Part B
 
-1. To be completed
-2. To be completed
-3. To be completed
-4. To be completed
-5. To be completed
-6. To be completed
-7. To be completed
-8. To be completed
+1. API tests can find connection problems and errors between the server and database. Unit tests with stubs may not find these problems. However, unit tests are still useful because they are faster and easier to debug.
+
+2. We create a new user for each test to make sure the tests don't affect each other. Using the public token could cause problems if other people use it too. In Project 2, I will create separate test data for each test.
+
+3. We use the same session to keep cookies between requests. Without a session, the server might not recognize the user when logging in. In Step 0.12, all three runs failed with HTTP 401.
+
+4. The defect happened when all 3 tools were excluded. HTTP 500 with an empty body is worse because the client doesn't know what went wrong. We keep the test as xfail so we can check if the bug gets fixed later.
+
+5. Base choice coverage needs 9 tests (1 + 2 + 3 + 1 + 2). All combinations coverage needs 72 tests (3 × 4 × 2 × 3). Base choice uses fewer tests while still covering every input block.
+
+6. I got 400 for GET, 404 for PUT, and 404 for DELETE. I would expect 403 because the user doesn't have permission. The API still blocks access, so I don't think it is a serious defect, but the status codes could be more consistent.
+
+7. I got HTTP 200 OK and a list of ratings, even though I used a made-up token. I think this is a security problem because someone could read ratings without logging in. In a real system, this could expose private data.
+
+8. API tests are better for checking status codes and JSON responses. Web page tests are better for checking the UI and whether users can interact with the website correctly.
