@@ -9,15 +9,15 @@
   - Run 1: FAILED (login returned HTTP 401 instead of 200)
   - Run 2: FAILED (login returned HTTP 401 instead of 200)
   - Run 3: FAILED (login returned HTTP 401 instead of 200)
-- Step 0.16, blocks of "how many of the three tools are excluded": To be completed
+- Step 0.16, blocks of "how many of the three tools are excluded": 0, 1, 2, and 3 tools excluded.
 
 ## Defect report
 
-- Title: To be completed
-- Request: To be completed
-- Expected result: To be completed
-- Actual result: To be completed
-- Severity: To be completed
+- Title: Excluding all available tools causes an internal server error.
+- Request: POST /api/pizza with excludedTools containing Knife, Pizza cutter, and Scissors.
+- Expected result: HTTP 400 with a JSON error message explaining that no tools are available.
+- Actual result: HTTP 500 with an empty response body.
+- Severity: Medium — the API fails to handle an invalid input gracefully.
 
 ## Part A
 
