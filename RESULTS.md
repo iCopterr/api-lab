@@ -21,9 +21,12 @@
 
 ## Part A
 
-- Step A4, status codes when the other user reads, changes and deletes: To be completed
-
-## Part B
+- Step A4, status codes when the other user reads, changes and deletes:
+  - GET: 400 
+  - PUT: 404  
+  - DELETE: 404
+  
+  ## Part B
 
 1. To be completed
 2. To be completed
