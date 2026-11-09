@@ -20,3 +20,76 @@ def test_stars_out_of_range(api, auth, pizza_id, stars):
     res = api.post("/api/ratings", json=new, headers=auth)
     assert res.status_code == 400
     assert res.json() == {"error": STARS_ERROR}
+    
+
+
+# C2: Decimal stars are refused.
+def test_decimal_stars_are_refused(api, auth, pizza_id):
+    res = api.post(
+        "/api/ratings",
+        json={"pizza_id": pizza_id, "stars": 3.5},
+        headers=auth,
+    )
+    assert res.status_code == 400
+    assert res.json() == {
+        "error": "json: cannot unmarshal number 3.5 into Go struct field Rating.stars of type int"
+    }
+
+
+# C2: Text stars are refused.
+def test_text_stars_are_refused(api, auth, pizza_id):
+    res = api.post(
+        "/api/ratings",
+        json={"pizza_id": pizza_id, "stars": "3"},
+        headers=auth,
+    )
+    assert res.status_code == 400
+    assert res.json() == {
+        "error": "json: cannot unmarshal string into Go struct field Rating.stars of type int"
+    }
+
+
+# C2: Missing stars are refused.
+def test_missing_stars_are_refused(api, auth, pizza_id):
+    res = api.post(
+        "/api/ratings",
+        json={"pizza_id": pizza_id},
+        headers=auth,
+    )
+    assert res.status_code == 400
+    assert res.json() == {"error": STARS_ERROR}
+
+
+# C3: A nonexistent pizza is refused.
+def test_nonexistent_pizza_is_refused(api, auth):
+    res = api.post(
+        "/api/ratings",
+        json={"pizza_id": 999999999, "stars": 3},
+        headers=auth,
+    )
+    assert res.status_code == 400
+    assert res.json() == {
+        "error": "pizza ID 999999999 not found"
+    }
+
+
+# C4: Missing token is refused.
+def test_missing_token_is_refused(api, pizza_id):
+    res = api.post(
+        "/api/ratings",
+        json={"pizza_id": pizza_id, "stars": 3},
+    )
+    assert res.status_code == 401
+    assert res.json() == {"error": "authentication failed"}
+
+
+# C4: Short token is refused.
+def test_short_token_is_refused(api, pizza_id):
+    res = api.post(
+        "/api/ratings",
+        json={"pizza_id": pizza_id, "stars": 3},
+        headers={"Authorization": "token short"},
+    )
+    assert res.status_code == 401
+    assert res.json() == {"error": "authentication failed"}
+
