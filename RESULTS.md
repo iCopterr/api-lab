@@ -5,7 +5,10 @@
 - Step 0.1, the number of pizza names: 18
 - Step 0.3, status code of the request without a token: 401
 - Step 0.4, the name of your pizza: The Purple Capricciosa
-- Step 0.12, results of the three runs without a session (optional): Not performed
+- Step 0.12, results of the three runs without a session (optional):
+  - Run 1: FAILED (login returned HTTP 401 instead of 200)
+  - Run 2: FAILED (login returned HTTP 401 instead of 200)
+  - Run 3: FAILED (login returned HTTP 401 instead of 200)
 - Step 0.16, blocks of "how many of the three tools are excluded": To be completed
 
 ## Defect report
